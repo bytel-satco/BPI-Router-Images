@@ -123,10 +123,11 @@ jobs:
           echo -e "userpackages=\"${{ inputs.packages }}\"" >> sourcefiles_bpi-r4.conf
           ./buildimg.sh bpi-r4 ${{ vars.DEBIAN_DIST }} ${{ inputs.kernel }}
 
-      - name: Upload to gdrive
-        uses: adityak74/google-drive-upload-git-action@main
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
-          credentials: ${{ secrets.CREDENTIALS }}
-          filename: "*.img.gz*"
-          folderId: ${{ secrets.FOLDERID }}
-          overwrite: "true" # optional boolean
+          name: debian-trixie-bpi-r4-image
+          path: ./*.img.gz
+
+
+      
